@@ -48,6 +48,7 @@ TagManager:
   - BackCover
   - FrontCover
   - FrontOnBack
+  - Key
   layers:
   - Default
   - TransparentFX

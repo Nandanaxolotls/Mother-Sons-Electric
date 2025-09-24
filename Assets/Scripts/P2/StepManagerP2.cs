@@ -61,7 +61,15 @@ public class StepManagerP2 : MonoBehaviour
     public GameObject SphereObjectFrontCoverOnBackCover;
     public GameObject FrontOnCoverSnapPoint; //snappoint script attached object
     public FrontOnBackSnapPoint frontOnBackSnapPoint;
-
+    public GameObject PunchingMachineScriptObject;
+    public PunchingMachine2 punchingMachine2;
+    public XRGrabInteractable BackCoverGrabFromPunching;
+    [Header("Machine4")]
+    public XRGrabInteractable KeyGrab;
+    public GameObject SphereObjectKey;
+    public GameObject KeySnapPoint;
+    public GameObject RemoteKeySnapPoint;
+    public GameObject SphereObjectRemotekey;
 
     [Header("Highlighter")]
     [Header("Machine1")]
@@ -115,6 +123,13 @@ public class StepManagerP2 : MonoBehaviour
     public StepWiseHighlighter FrontCoverOnAssemblyHighlight;
     public StepWiseHighlighter SphereFrontCoverOnBackCoverHighlight;
     public GameObject Tooltip8;
+    public StepWiseHighlighter BackCoverAfterPunchingHighlight;
+    [Header("Machine4")]
+    public StepWiseHighlighter KeyHighlight;
+    public GameObject Arrow18;
+    public StepWiseHighlighter SphereObjectKeyHighlight;
+    public GameObject Arrow19;
+    public StepWiseHighlighter SphereRemoteKeyHighlight;
 
 
     [Header("Display1")]
@@ -143,6 +158,7 @@ public class StepManagerP2 : MonoBehaviour
         frontCoverOnAssembly.FrontOnMachineSnapped += FrontCoverSnapped;
         greenButtonP2.CameraChecked += CameraChecked;
         frontOnBackSnapPoint.FrontOnBackSnapped += FrontSnappedOnBack;
+        punchingMachine2.onReachedOriginal += CoverPunchingDone;
     }
     //Machine1
     private bool grabbingDone = false;
@@ -384,8 +400,37 @@ public class StepManagerP2 : MonoBehaviour
     {
         SphereObjectFrontCoverOnBackCover.SetActive(false);
         Tooltip8.SetActive(true);
-    }
+        PunchingMachineScriptObject.SetActive(true );
 
+    }
+    public void CoverPunchingDone()
+    {
+        BackCoverGrabFromPunching.enabled = true;
+        BackCoverAfterPunchingHighlight.Highlight();
+    }
+    public void RemoteGrabFromPunching()
+    {
+        BackCoverAfterPunchingHighlight.Unhighlight();
+        KeyHighlight.Highlight();
+        Arrow18.SetActive(true);
+        KeyGrab.enabled = true;
+    }
+    //Machine 4
+    public void KeyGrabbed()
+    {
+        Arrow18.SetActive(false);
+        SphereObjectKey.SetActive(true);
+        SphereObjectKeyHighlight.Highlight();   
+        KeySnapPoint.SetActive(true);
+    }
+    public void KeySnapped()
+    {
+        SphereObjectKey.SetActive(false);
+        Arrow19.SetActive(true);
+        RemoteKeySnapPoint.SetActive(true);
+        SphereObjectRemotekey.SetActive(true);
+        SphereRemoteKeyHighlight.Highlight();
+    }
 
 }
  

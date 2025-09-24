@@ -43,7 +43,7 @@ public class GreenButtonP2 : MonoBehaviour
 
     public IEnumerator Displaying()
     {
-        Tooltip7.SetActive(true);
+        Tooltip7.SetActive(false);
         Button1.SetActive(true);
         yield return new WaitForSeconds(3f);
         Button1.SetActive(true);

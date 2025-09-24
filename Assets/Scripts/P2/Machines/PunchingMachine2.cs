@@ -12,6 +12,9 @@ public class PunchingMachine2 : MonoBehaviour
     public GameManager gameManager;
     public GameObject Tooltip8;
 
+    public GameObject Button2;
+    public GameObject Button3;
+
     [Header("Target Values (Object1)")]
     public float targetZ = 90f;   // starting Z
     public float oppositeZ = -90f; // opposite Z
@@ -30,12 +33,13 @@ public class PunchingMachine2 : MonoBehaviour
     [Header("Animation Settings")]
     public float halfRotationDuration = 0.5f;
     public float moveDuration = 1f;
-
+    public bool Locked = false;
     public event System.Action onReachedDesired;
     public event System.Action onReachedOriginal;
 
     private bool isHovered = false;
     private bool isRunning = false;
+
     private Coroutine actionCoroutine;
 
     void Start()
@@ -61,6 +65,7 @@ public class PunchingMachine2 : MonoBehaviour
 
     void Update()
     {
+        if(Locked) return;
         if (isRunning) return;
 
         if (isHovered && selectAction.action.WasPressedThisFrame())
@@ -96,10 +101,11 @@ public class PunchingMachine2 : MonoBehaviour
         ));
 
         onReachedOriginal?.Invoke();
-
+        Button2.SetActive(false);
+        Button3.SetActive(true);
         // Step 4: Return Object3 to original
         yield return StartCoroutine(MoveZ(targetObject3, moveZEnd, moveZStart));
-
+        Locked = true;
         isRunning = false;
     }
 
