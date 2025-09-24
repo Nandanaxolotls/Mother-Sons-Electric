@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/GogoGaga/OptimizedRopesAndCables/Example/Scenes/ExampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: b2655c4588388444c988153c867cf6e1
+  - enabled: 1
+    path: Assets/Scenes/P1.unity
+    guid: 195187309ce6f2b49b36e6c34e8cbe74
+  - enabled: 1
+    path: Assets/Scenes/RB.unity
+    guid: d7027376f3c47104485c21d8891b4eac
+  - enabled: 0
+    path: Assets/Scenes/CY.unity
+    guid: acdb9695ed2e622478fb1988e092c63e
+  - enabled: 1
+    path: Assets/Scenes/FB.unity
+    guid: a6b0e3278b479e24d88bda0c7ad260aa
+  - enabled: 1
+    path: Assets/Scenes/RT.unity
+    guid: c0c30827ff33dc64d9338767b061b060
+  - enabled: 1
+    path: Assets/Scenes/P1T.unity
+    guid: 2e58f69418645a4459275aae87068bbe
+  - enabled: 0
+    path: Assets/Scenes/CYT.unity
+    guid: ad0652b9c23af7c4280ec3f66e3406fb
+  - enabled: 1
+    path: Assets/Scenes/FBT.unity
+    guid: 27bdb879d378c6c4998013723bc9ab5c
+  - enabled: 1
+    path: Assets/Scenes/RBT.unity
+    guid: be051d9d0706409469bfb91d202bbc4d
+  - enabled: 1
+    path: Assets/Scenes/RTT.unity
+    guid: 4865a2af621935e4a9b9be7773f4919e
+  - enabled: 0
+    path: Assets/Scenes/Compressor.unity
+    guid: 5dd03dac208bb004d882af73288946b6
+  - enabled: 0
+    path: Assets/Scenes/CompressorT.unity
+    guid: 8ee62a49f2ba0c44083084e250143a0c
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bb84addf839a50448809cf99f3b37383,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: cf3424b7aa51ccf43a64e4278bd0197d,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 880203036885f8241acfce575eab8170,
+      type: 2}

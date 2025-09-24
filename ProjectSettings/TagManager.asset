@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Left Hand
+  - Right Hand
+  - Undefected
+  - Defected
+  - Good
+  - Childpart
+  - CB30
+  - CB35
+  - CB40
+  - IgnoreActivation
+  - RBWOP
+  - NotGood
+  - ScoreTxt
+  - WirePoint2
+  - WirePoint1
+  - Bulb
+  - WirePoint3
+  - EMarkFinal
+  - FrontTarget
+  - BackTarget
+  - TargetPoint3
+  - TargetPoint2
+  - TargetPoint1
+  - Marker
+  - Chip
+  - Cover
+  - Cover2
+  - Cover3
+  - Cover4
+  - UpperCover
+  - Cover5
+  - Wire
+  - Cover6
+  - Sticker
+  - Final
+  - Lock
+  - UnLock
+  - Rubber
+  - Main
+  - BatteryPlacer
+  - Battery
+  - BackCover
+  - FrontCover
+  - FrontOnBack
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
