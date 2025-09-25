@@ -49,6 +49,8 @@ TagManager:
   - FrontCover
   - FrontOnBack
   - Key
+  - RemoteKey
+  - RemoteKeyInLaser
   layers:
   - Default
   - TransparentFX

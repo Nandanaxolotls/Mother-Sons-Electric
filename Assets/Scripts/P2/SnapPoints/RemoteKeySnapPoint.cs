@@ -24,7 +24,7 @@ public class RemoteKeySnapPoint : MonoBehaviour
     private XRSocketInteractor socketInteractor;
     private XRGrabInteractable candidateInteractable;
 
-    public event System.Action FrontOnMachineSnapped;
+    public event System.Action RemoteKeySnapped;
     private void Awake()
     {
         socketInteractor = GetComponent<XRSocketInteractor>();
@@ -74,7 +74,7 @@ public class RemoteKeySnapPoint : MonoBehaviour
             // objectToActivateAfterSnap.transform.position = snapPosition;
             // objectToActivateAfterSnap.transform.rotation = snapRotationQuat;
             objectToActivateAfterSnap.SetActive(true);
-            FrontOnMachineSnapped?.Invoke(); // Notify StepManager
+            RemoteKeySnapped?.Invoke(); // Notify StepManager
                                              // ? Find and start the sequential snap process
 
         }

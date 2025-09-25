@@ -65,11 +65,39 @@ public class StepManagerP2 : MonoBehaviour
     public PunchingMachine2 punchingMachine2;
     public XRGrabInteractable BackCoverGrabFromPunching;
     [Header("Machine4")]
+    public KeySnapPoint keySnapPoint;
     public XRGrabInteractable KeyGrab;
     public GameObject SphereObjectKey;
     public GameObject KeySnapPoint;
-    public GameObject RemoteKeySnapPoint;
+    public GameObject RemoteKeyObjectSnapPoint;
     public GameObject SphereObjectRemotekey;
+    public RemoteKeySnapPoint remoteKeySnapPoint;
+    public GameObject Drawer2ScriptObject;
+    public Drawer2 drawer2;
+    public XRGrabInteractable RemoteKeyGrabbedFromDrawer;
+    [Header("Machine5")]
+    public GameObject SphereObjectRemoteOnLaser;
+    public GameObject RemoteKeySnapPointOnLaser;
+    public RemoteKeyOnLaserSnapPoint remoteKeySnapPointOnLaser;
+    public LaserMachine laserMachine;
+    public XRGrabInteractable RemoteGrabFromLaser;
+    [Header("Machine6")]
+    public GameObject RemoteOnBoxSnapPoint;
+    public GameObject SphereObjectRemoteOnBox;
+    public RemoteKeyInBoxSnapPoint remoteKeyInBoxSnapPoint;
+    public GameObject BoxDoorScriptObject;
+    public BoxDoorMovement boxDoorMovement;
+    public XRGrabInteractable RemoteGrabFromBox;
+    public GameObject RemoteKeyOutSnapPoint;
+    public XRGrabInteractable KeyGrabbedFromRemote;
+    public RemoteKeyOnTableSnapPoint remoteKeyOnTableSnapPoint;
+    public GameObject KeyOnTableSnapPoint;
+    public KeyOnTableSnapPoint keyOnTableSnapPoint;
+    public XRGrabInteractable RemoteKeyOnTableGrab;
+    public GameObject KeyInRemoteAfterRemoved;
+    public GameObject FinalKeySnapPoint;
+    public FinalKeyInBoxSnapPoint finalKeyInBoxSnapPoint;
+
 
     [Header("Highlighter")]
     [Header("Machine1")]
@@ -130,13 +158,36 @@ public class StepManagerP2 : MonoBehaviour
     public StepWiseHighlighter SphereObjectKeyHighlight;
     public GameObject Arrow19;
     public StepWiseHighlighter SphereRemoteKeyHighlight;
-
+    public GameObject Tooltip9;
+    public GameObject Tooltip10;
+    public GameObject Arrow20;
+    [Header("Machine5")]
+    public GameObject Arrow21;
+    public StepWiseHighlighter SphereRemoteOnLaserHighlight;
+    public StepWiseHighlighter RemoteKeyFromLaserHighlight;
+    public GameObject Arrow22;
+    [Header("Machine6")]
+    public GameObject Arrow23;
+    public StepWiseHighlighter SphereRemoteOnBoxHighlight;
+    public GameObject Tooltip11;
+    public GameObject Tooltip12;
+    public GameObject Arrow24;
+    public StepWiseHighlighter KeyInRemote;
+    public GameObject Arrow25;
+    public GameObject Arrow26;
+    public GameObject Arrow27;
+    public GameObject Arrow28;
+    public GameObject Tooltip13;
 
     [Header("Display1")]
     public GameObject Button1;
     public GameObject Button2;
     public GameObject Button3;
     public GameObject Button4;
+    public GameObject Button5;
+    public GameObject Button6;
+    public GameObject Button7;
+    public GameObject Button8;
 
     void Start()
     {
@@ -159,6 +210,18 @@ public class StepManagerP2 : MonoBehaviour
         greenButtonP2.CameraChecked += CameraChecked;
         frontOnBackSnapPoint.FrontOnBackSnapped += FrontSnappedOnBack;
         punchingMachine2.onReachedOriginal += CoverPunchingDone;
+        keySnapPoint.KeySnapped += KeySnapped;
+        remoteKeySnapPoint.RemoteKeySnapped += RemoteKeySnapped;
+        drawer2.onReachedDesired += Drawer2Closed;
+        drawer2.onReachedOriginal += Drawer2Opened;
+        remoteKeySnapPointOnLaser.RemoteKeySnapped += RemoteSnappedToLaser;
+        laserMachine.LaserMachineDone += LaserDone;
+        remoteKeyInBoxSnapPoint.RemoteKeySnappedToBox += RemoteSnappedToBox;
+        boxDoorMovement.onReachedDesired += BoxDoorClosed;
+        boxDoorMovement.onReachedOriginal += BoxDoorOpened;
+        remoteKeyOnTableSnapPoint.RemoteKeySnappedToTable += RemotePlaceOnTable;
+        keyOnTableSnapPoint.KeySnappedToTable += KeySnappedToTable;
+        finalKeyInBoxSnapPoint.FinalKeySnapped += FinalKeySnappedToBox;
     }
     //Machine1
     private bool grabbingDone = false;
@@ -427,10 +490,133 @@ public class StepManagerP2 : MonoBehaviour
     {
         SphereObjectKey.SetActive(false);
         Arrow19.SetActive(true);
-        RemoteKeySnapPoint.SetActive(true);
+        RemoteKeyObjectSnapPoint.SetActive(true);
         SphereObjectRemotekey.SetActive(true);
         SphereRemoteKeyHighlight.Highlight();
     }
+    public void RemoteKeySnapped()
+    {
+        Arrow19.SetActive(false);
+        SphereObjectRemotekey.SetActive(false);
+        Tooltip9.SetActive(true);
+        Drawer2ScriptObject.SetActive(true) ;
+
+}
+    public void Drawer2Closed()
+    {
+        StartCoroutine(DisplayOfDrawer());
+    }
+    public IEnumerator DisplayOfDrawer()
+    {
+        Button5.SetActive(true);
+        yield return new WaitForSeconds(5);
+        Button5.SetActive(false);
+        Button6.SetActive(true);
+        drawer2.Unlock();
+        Tooltip10.SetActive(true);
+    }
+    public void Drawer2Opened()
+    {
+        Tooltip10.SetActive(false);
+        RemoteKeyGrabbedFromDrawer.enabled = true;
+        Arrow20.SetActive(true);
+    }
+    public void RemoteKeyGrabbed()
+    {
+        Arrow20.SetActive(false);
+        Arrow21.SetActive(true);
+        SphereObjectRemoteOnLaser.SetActive(true);
+        SphereRemoteOnLaserHighlight.Highlight();
+        RemoteKeySnapPointOnLaser.SetActive(true);
+    }
+    public void RemoteSnappedToLaser()
+    {
+        Arrow21.SetActive(false);
+        SphereObjectRemoteOnLaser.SetActive(false);
+        laserMachine.StartProcess();
+    }
+    public void LaserDone()
+    {
+        RemoteGrabFromLaser.enabled = true ;
+        RemoteKeyFromLaserHighlight.Highlight() ;
+        Arrow22.SetActive(true);
+    }
+    public void RemoteGrabbedFromLaser()
+    {
+        Arrow22.SetActive(false);
+        RemoteKeyFromLaserHighlight.Unhighlight();
+        Arrow23.SetActive(true);
+        RemoteOnBoxSnapPoint.SetActive(true);
+        SphereObjectRemoteOnBox.SetActive(true);
+        SphereRemoteOnBoxHighlight.Highlight();
+    }
+    public void RemoteSnappedToBox()
+    {
+        Tooltip11.SetActive(true);
+        SphereObjectRemoteOnBox.SetActive(false);
+        Arrow23.SetActive(false);
+        BoxDoorScriptObject.SetActive(true );
+
+    }
+    public void BoxDoorClosed()
+    {
+        StartCoroutine(DisplayCheckingStart());
+    }
+    public IEnumerator DisplayCheckingStart()
+    {
+        Button7.SetActive(true);
+        yield return new WaitForSeconds(5);
+        Button7.SetActive(false);
+        Button8.SetActive(true);
+        boxDoorMovement.Unlock();
+        Tooltip12.SetActive(true);
+
+    }
+    public void BoxDoorOpened()
+    {
+        boxDoorMovement.PermanantlyLock();
+        Arrow24.SetActive(true);
+        RemoteGrabFromBox.enabled = true;
+    }
+    public void RemoteKeyGrabbedFromBox()
+    {
+        Arrow24.SetActive(false);
+        Arrow25.SetActive(true);
+        RemoteKeyOutSnapPoint.SetActive(true);
+       
+    }
+    public void RemotePlaceOnTable()
+    {
+        Arrow25.SetActive(false);
+        KeyGrabbedFromRemote.enabled = true;
+        KeyInRemote.Highlight();
+        Tooltip13.SetActive(true);
+    }
+    public void KeyGrabFromRemote()
+    {
+        Arrow26.SetActive(true);
+        Tooltip13.SetActive(false);
+        KeyInRemoteAfterRemoved.SetActive(false );
+        KeyOnTableSnapPoint.SetActive(true);
+    }
+    public void KeySnappedToTable()
+    {
+        Arrow26.SetActive(false);
+        Arrow27.SetActive(true);
+        RemoteKeyOnTableGrab.enabled = true;
+    }
+    public void RemoteGrabbedFromTable()
+    {
+        Arrow27.SetActive(false);
+        FinalKeySnapPoint.SetActive(true);
+        Arrow28.SetActive(true);
+    }
+    public void FinalKeySnappedToBox()
+    {
+        Arrow28.SetActive(false);
+        Debug.Log("Level completed");
+    }
+
 
 }
  
